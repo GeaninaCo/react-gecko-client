@@ -2,11 +2,16 @@ import axios from 'axios';
 
 const instance = axios.create({
     baseURL: 'https://api.coingecko.com/api/v3',
-    headers: {'Accept': 'application/json'} //ii spunem ca va fi de tip json
+    headers: {'Accept': 'application/json'} 
+    
+    //ii spunem ca va fi de tip json
 })
 
-const getCoinsMarkets =  ()=>{ //returneaza un promise si de aceea nu mai trecem async await
-return instance.get ( `/coins/markets?vs_currency=EUR&order=market_cap_desc`) //calul de http catre Api
+const getCoinsMarkets = (pageNo) => {
+    return instance.get('/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=10&page='+pageNo)
+}
+const getCoinById = (id)=> {
+    return instance.get ("/coins/"+id)
 }
 
-export {getCoinsMarkets} //e un obiect si il trecem intre {}, nu e by default
+export {getCoinsMarkets, getCoinById} //e un obiect si il trecem intre {}, nu e by default
